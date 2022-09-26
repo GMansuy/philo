@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 15:52:26 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/26 16:44:21 by gmansuy          ###   ########.fr       */
+/*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
+/*   Updated: 2022/09/26 16:38:13 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int argc, char **argv)
+void	init_all(t_data *philo)
 {
-	t_data	philo;
-
-	init_all(&philo);
-	if (parsing(argc, argv, &philo) != 0)
-		return (1);
-	return (0);
+	philo->number_of_philo = 0;
+	philo->time_to_die = 0;
+	philo->time_to_eat = 0;
+	philo->time_to_sleep = 0;
+	philo->number_of_eat = 0;
 }
