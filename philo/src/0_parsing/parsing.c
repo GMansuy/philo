@@ -6,13 +6,13 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:35:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/26 16:49:36 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/26 17:22:57 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-long long	ft_atol(char *nptr)
+static long long	ft_atol(char *nptr)
 {
 	int			i;
 	int			neg;
@@ -41,7 +41,7 @@ long long	ft_atol(char *nptr)
 	return (value);
 }
 
-int	get_int_from_args(char *str)
+static int	get_int_from_args(char *str)
 {
 	long long	value;
 

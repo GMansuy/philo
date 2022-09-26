@@ -17,16 +17,16 @@ SAN			= -fsanitize=address
 
 # SOURCES
 
-MAIN = main msg init
+SRC_FILES 	=	main \
+				init \
+				msg \
+				free \
+				0_parsing/parsing \
+				1_philo/generate_philo \
 
-PARSING_DIR = 0_parsing/
-PARSING = parsing
-
-ALL_DIRS	+=	$(OBJ_DIR)
-ALL_DIRS	+=	$(addprefix $(OBJ_DIR), $(PARSING_DIR))
-
-SRC_FILES	+= $(MAIN)
-SRC_FILES	+= $(addprefix $(PARSING_DIR), $(PARSING))
+ALL_DIRS	=	$(OBJ_DIR) \
+				$(OBJ_DIR)/0_parsing \
+				$(OBJ_DIR)/1_philo \
 
 C_FILES		=	$(addsuffix .c, $(SRC_FILES))
 SRCS 		=	$(addprefix $(SRC_DIR), $(C_FILES))

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 15:52:26 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/26 17:30:48 by gmansuy          ###   ########.fr       */
+/*   Created: 2022/09/26 17:08:13 by gmansuy           #+#    #+#             */
+/*   Updated: 2022/09/26 17:31:00 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int argc, char **argv)
+static void	free_threads(t_th *threads)
 {
-	t_data	philo;
-	t_th	threads;
+	free(threads->th);
+}
 
-	philo.threads = &threads;
-	init_all(&philo);
-	if (parsing(argc, argv, &philo) != 0)
-		return (1);
-	if (generate_philo(&philo) != 0)
-		return (free_all(&philo), 2);
-	return (free_all(&philo), 0);
+void	free_all(t_data *philo)
+{
+	free_threads(philo->threads);
 }

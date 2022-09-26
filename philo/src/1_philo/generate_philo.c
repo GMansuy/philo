@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   generate_philo.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 15:52:26 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/26 17:30:48 by gmansuy          ###   ########.fr       */
+/*   Created: 2022/09/26 16:59:29 by gmansuy           #+#    #+#             */
+/*   Updated: 2022/09/26 17:31:21 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+static int	allocate_th(t_data *philo, t_th *threads)
 {
-	t_data	philo;
-	t_th	threads;
+	threads->th = malloc(sizeof(pthread_t) * philo->number_of_philo);
+	return (0);
+}
 
-	philo.threads = &threads;
-	init_all(&philo);
-	if (parsing(argc, argv, &philo) != 0)
+int	generate_philo(t_data *philo)
+{
+	if (allocate_th(philo, philo->threads) != 0)
 		return (1);
-	if (generate_philo(&philo) != 0)
-		return (free_all(&philo), 2);
-	return (free_all(&philo), 0);
+	return (0);
 }

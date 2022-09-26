@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/26 16:54:32 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/26 17:30:37 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 typedef struct s_th
 {
-	pthread_t 		*th;
-	pthread_mutex_t mutex;
+	pthread_t		*th;
+	pthread_mutex_t	mutex;
 }	t_th;
 
 typedef struct s_data
@@ -37,16 +37,17 @@ typedef struct s_data
 	t_th	*threads;
 }	t_data;
 
-
-
 //init.c
 void	init_all(t_data *philo);
 //msg.c
 int		msg(char *msg);
 int		usage(void);
 size_t	get_len(const char *s);
-//------------------------------------------ PARSING
+//free.c
+void	free_all(t_data *philo);
 //parsing.c
 int		parsing(int argc, char **argv, t_data *philo);
+//generate_philo.c
+int		generate_philo(t_data *philo);
 
 #endif
