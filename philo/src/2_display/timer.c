@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generate_philo.c                                   :+:      :+:    :+:   */
+/*   timer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 16:59:29 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 12:12:20 by gmansuy          ###   ########.fr       */
+/*   Created: 2022/09/27 11:23:09 by gmansuy           #+#    #+#             */
+/*   Updated: 2022/09/27 12:12:15 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-static int	allocate_th(t_data *philo, t_th *threads)
+void	get_timer(struct timeval t0)
 {
-	threads->th = malloc(sizeof(pthread_t) * philo->number_of_philo);
-	return (0);
+	struct timeval	timestamp;
+	time_t			curr_time;
+
+	gettimeofday(&timestamp, NULL);
+	curr_time = ((timestamp.tv_sec - t0.tv_sec) * 1000000
+			+ (timestamp.tv_usec - t0.tv_usec)) / 1000 ;
+	if (curr_time < 10)
+		printf("%d", 0);
+	if (curr_time < 100)
+		printf("%d", 0);
+	if (curr_time < 1000)
+		printf("%d", 0);
+	printf("%ld\n", curr_time);
 }
 
-int	generate_philo(t_data *philo)
+void	init_timer(struct timeval *t0)
 {
-	if (allocate_th(philo, philo->threads) != 0)
-		return (1);
-	return (0);
+	gettimeofday(t0, NULL);
 }

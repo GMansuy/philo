@@ -23,10 +23,13 @@ SRC_FILES 	=	main \
 				free \
 				0_parsing/parsing \
 				1_philo/generate_philo \
+				1_philo/set_forks \
+				2_display/timer \
 
 ALL_DIRS	=	$(OBJ_DIR) \
 				$(OBJ_DIR)/0_parsing \
 				$(OBJ_DIR)/1_philo \
+				$(OBJ_DIR)/2_display \
 
 C_FILES		=	$(addsuffix .c, $(SRC_FILES))
 SRCS 		=	$(addprefix $(SRC_DIR), $(C_FILES))
