@@ -1,19 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 17:08:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 12:45:08 by gmansuy          ###   ########.fr       */
+/*   Created: 2022/09/27 12:28:15 by gmansuy           #+#    #+#             */
+/*   Updated: 2022/09/27 12:28:30 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
-
-void	free_all(t_data *philo)
-{
-	free(philo->phi);
-	free(philo->forks);
-}
+#include "../../include/philo.h"
