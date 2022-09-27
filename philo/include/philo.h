@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 12:11:30 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 12:16:32 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_th
 typedef struct s_data
 {
 	struct timeval	t0;
+	int				*forks;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -52,7 +53,8 @@ int		parsing(int argc, char **argv, t_data *philo);
 //PHILO
 //generate_philo.c
 int		generate_philo(t_data *philo);
-
+//set_forks.c
+int		init_forks(t_data *philo);
 //DISPLAY
 //timer.c
 void	init_timer(struct timeval *t0);
