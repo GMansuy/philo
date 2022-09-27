@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:23:09 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 12:12:15 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:47:34 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	get_timer(struct timeval t0)
 		printf("%d", 0);
 	if (curr_time < 1000)
 		printf("%d", 0);
-	printf("%ld\n", curr_time);
+	printf("%ld ", curr_time);
 }
 
 void	init_timer(struct timeval *t0)

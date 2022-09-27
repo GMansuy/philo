@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 16:31:33 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 18:23:38 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_data
 {
 	t_phi			*phi;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	wait_eat;
+	pthread_mutex_t	wait_sleep;
+	int				start_pair;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -50,7 +53,7 @@ typedef struct s_data
 //init.c
 void	init_all(t_data *data);
 void	init_phi(t_data *data);
-void	init_mutex(t_data *data);
+int		init_mutex(t_data *data);
 //msg.c
 int		msg(char *msg);
 int		usage(void);

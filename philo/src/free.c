@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:08:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 16:31:55 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 18:25:40 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	destroy_mutex(t_data *data)
 	
 	i = -1;
 	while (++i < data->number_of_philo)
-		pthread_mutex_destroy(&data->forks[i]);	
+		pthread_mutex_destroy(&data->forks[i]);
+	pthread_mutex_destroy(&data->wait_eat);
+	pthread_mutex_destroy(&data->wait_sleep);
+
 }
 
 void	free_all(t_data *philo)
