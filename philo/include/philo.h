@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 16:01:53 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:31:33 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,28 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_eat;	
+	int				prio;
 	int				death;	
 	struct timeval	t0;
 }	t_data;
 
 //init.c
-void	init_all(t_data *philo);
-void	init_phi(t_data *philo);
+void	init_all(t_data *data);
+void	init_phi(t_data *data);
+void	init_mutex(t_data *data);
 //msg.c
 int		msg(char *msg);
 int		usage(void);
 size_t	get_len(const char *s);
 //free.c
-void	free_all(t_data *philo);
+void	destroy_mutex(t_data *data);
+void	free_all(t_data *data);
 //parsing.c
-int		parsing(int argc, char **argv, t_data *philo);
+int		parsing(int argc, char **argv, t_data *data);
 
 //PHILO
 //generate_philo.c
-int		generate_philo(t_data *philo);
+int		generate_philo(t_data *data);
 //get_data.c
 int		allocate_phi(t_data *data);
 int		allocate_forks(t_data *data);

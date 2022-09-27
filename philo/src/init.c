@@ -6,11 +6,20 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 15:58:25 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:44:59 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+void	init_mutex(t_data *data)
+{
+	int i;
+	
+	i = -1;
+	while (++i < data->number_of_philo)
+		pthread_mutex_init(&data->forks[i], NULL);	
+}
 
 void	init_phi(t_data *data)
 {
@@ -19,11 +28,12 @@ void	init_phi(t_data *data)
 	i = 0;
 	while (i < data->number_of_philo)
 	{
-		data->phi->state = thinking;
-		if ((i + 1) % 2 == 0)
-			data->phi->group = pair;
+		data->phi[i].id = i;
+		data->phi[i].state = thinking;
+		if (i % 2 == 0)
+			data->phi[i].group = pair;
 		else
-			data->phi->group = impair;
+			data->phi[i].group = impair;
 		i++;
 	}
 }
