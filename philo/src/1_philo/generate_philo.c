@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:59:29 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 18:28:07 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 18:35:00 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ static int	main_loop(t_data *data, t_phi *phi)
 			return (1);
 		while (data->start_pair != 3)
 			waiting++;
-		printf("\n");
+		// printf("\n");
 		waiting = 0;
 		data->start_pair = 0;
 		if (prio_loop(data, phi, pair) != 0)
 			return (2);
 		while (data->start_pair != 3)
 			waiting++;
-		printf("\n");
+		// printf("\n");
 		waiting = 0;
 		data->start_pair = 0;
 		if (join_threads(data) != 0)
