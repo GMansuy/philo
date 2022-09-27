@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 12:56:10 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:01:53 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@
 
 enum e_status {thinking, eating, sleeping, dead};
 enum e_group {pair, impair};
+enum e_action {init, grab, pose};
 
 typedef struct s_phi
 {
 	pthread_t	th;
+	int			id;
 	int			state;
-	int			forks;
 	int			group;
 }	t_phi;
 
 typedef struct s_data
 {
 	t_phi			*phi;
-	int				*forks;
+	pthread_mutex_t	*forks;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -43,7 +44,6 @@ typedef struct s_data
 	int				number_of_eat;	
 	int				death;	
 	struct timeval	t0;
-	pthread_mutex_t	mutex;
 }	t_data;
 
 //init.c
@@ -61,8 +61,15 @@ int		parsing(int argc, char **argv, t_data *philo);
 //PHILO
 //generate_philo.c
 int		generate_philo(t_data *philo);
+//get_data.c
+int		allocate_phi(t_data *data);
+int		allocate_forks(t_data *data);
+t_data	*get_struct(void);
+
+//routines.c
+void	*routine(void *arg);
 //set_forks.c
-int		init_forks(t_data *philo);
+int		set_forks(int action, int info);
 //DISPLAY
 //timer.c
 void	init_timer(struct timeval *t0);

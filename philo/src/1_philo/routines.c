@@ -6,8 +6,14 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:28:15 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 12:28:30 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:02:28 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
+
+void	*routine(void *arg)
+{
+	(void) arg;
+	return (NULL);
+}

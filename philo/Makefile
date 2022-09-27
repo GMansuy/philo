@@ -23,8 +23,8 @@ SRC_FILES 	=	main \
 				free \
 				0_parsing/parsing \
 				1_philo/generate_philo \
-				1_philo/set_forks \
 				1_philo/routines \
+				1_philo/get_data \
 				2_display/timer \
 
 ALL_DIRS	=	$(OBJ_DIR) \
