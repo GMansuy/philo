@@ -6,11 +6,20 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:35:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 13:26:41 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 15:21:21 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
+
+int	is_neg(t_data *data)
+{
+	if (data->number_of_eat && data->number_of_eat < 0)
+		return (1);
+	return ((data->number_of_eat < 0) || (data->number_of_philo < 0)
+		|| (data->time_to_eat < 0) || (data->time_to_sleep < 0)
+		|| (data->time_to_die < 0));
+}
 
 static long long	ft_atol(char *nptr)
 {
@@ -54,27 +63,29 @@ static int	get_int_from_args(char *str)
 		return ((int)value);
 }
 
-int	parsing(int argc, char **argv, t_data *philo)
+int	parsing(int argc, char **argv, t_data *data)
 {
 	if (argc < 5 || argc > 6)
 		return (usage());
-	philo->number_of_philo = get_int_from_args(argv[1]);
-	if (!philo->number_of_philo)
+	data->number_of_philo = get_int_from_args(argv[1]);
+	if (!data->number_of_philo)
 		return (2);
-	philo->time_to_die = get_int_from_args(argv[2]);
-	if (!philo->time_to_die)
+	data->time_to_die = get_int_from_args(argv[2]);
+	if (!data->time_to_die)
 		return (3);
-	philo->time_to_eat = get_int_from_args(argv[3]);
-	if (!philo->time_to_eat)
+	data->time_to_eat = get_int_from_args(argv[3]);
+	if (!data->time_to_eat)
 		return (4);
-	philo->time_to_sleep = get_int_from_args(argv[4]);
-	if (!philo->time_to_sleep)
+	data->time_to_sleep = get_int_from_args(argv[4]);
+	if (!data->time_to_sleep)
 		return (5);
 	if (argc == 6)
 	{
-		philo->number_of_eat = get_int_from_args(argv[5]);
-		if (!philo->number_of_eat)
+		data->number_of_eat = get_int_from_args(argv[5]);
+		if (!data->number_of_eat)
 			return (6);
 	}
+	if (is_neg(data) != 0)
+		return (7);
 	return (0);
 }

@@ -25,6 +25,7 @@ SRC_FILES 	=	main \
 				1_philo/generate_philo \
 				1_philo/routines \
 				1_philo/get_data \
+				1_philo/launch_threads \
 				2_display/timer \
 
 ALL_DIRS	=	$(OBJ_DIR) \

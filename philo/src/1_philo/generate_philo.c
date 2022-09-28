@@ -6,13 +6,13 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:59:29 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 18:35:00 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:06:40 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-static int join_threads(t_data *data)
+static int	join_threads(t_data *data)
 {
 	int	i;
 
@@ -25,45 +25,34 @@ static int join_threads(t_data *data)
 	return (0);
 }
 
-static int	prio_loop(t_data *data, t_phi *phi, int prio)
+static int	prio_loop(t_data *data)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < data->number_of_philo)
 	{
-		if (prio == phi[i].group)
+		if (data->phi[i].state == eating)
 		{
-			if (pthread_create(&phi[i].th, NULL, &routine,
-				 (void *)&phi[i]) != 0)
-				 return (1);
+			if (th_eat(&data->phi[i]) != 0)
+				return (1);
+		}
+		else if (data->phi[i].state == sleeping)
+		{
+			if (pthread_create(&data->phi[i].th, NULL,
+					&sleep_routine, (void *)&data->phi[i]) != 0)
+				return (1);
 		}
 	}	
 	return (0);
 }
 
-static int	main_loop(t_data *data, t_phi *phi)
+static int	main_loop(t_data *data)
 {
-	int	waiting;
-	
-	waiting = 0;
 	init_mutex(data);
 	while (!data->death)
 	{
-		if (prio_loop(data, phi, impair) != 0)
-			return (1);
-		while (data->start_pair != 3)
-			waiting++;
-		// printf("\n");
-		waiting = 0;
-		data->start_pair = 0;
-		if (prio_loop(data, phi, pair) != 0)
-			return (2);
-		while (data->start_pair != 3)
-			waiting++;
-		// printf("\n");
-		waiting = 0;
-		data->start_pair = 0;
+		prio_loop(data);
 		if (join_threads(data) != 0)
 			return (3);
 	}
@@ -73,10 +62,13 @@ static int	main_loop(t_data *data, t_phi *phi)
 
 int	generate_philo(t_data *data)
 {
+	int	signal;
+
 	if (allocate_phi(data) != 0)
 		return (1);
 	if (allocate_forks(data) != 0)
 		return (2);
-	main_loop(data, data->phi);
+	signal = main_loop(data);
+	printf("\nsignal -- %d\n", signal);
 	return (0);
 }

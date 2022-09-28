@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/27 18:23:38 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:05:16 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	wait_eat;
 	pthread_mutex_t	wait_sleep;
-	int				start_pair;
+	pthread_mutex_t	wait_think;
+	pthread_mutex_t	wait_display;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -71,13 +72,20 @@ int		generate_philo(t_data *data);
 int		allocate_phi(t_data *data);
 int		allocate_forks(t_data *data);
 t_data	*get_struct(void);
-
+//launch_threads.c
+int		th_eat(t_phi *phi);
+int		th_sleep(t_phi *phi);
+int		th_think(t_phi *phi);
 //routines.c
-void	*routine(void *arg);
+void	*think_routine(t_data *data, t_phi *phi);
+void	*eat_routine(void *arg);
+void	*sleep_routine(void *arg);
+
 //set_forks.c
 int		set_forks(int action, int info);
 //DISPLAY
 //timer.c
 void	init_timer(struct timeval *t0);
-void	get_timer(struct timeval t0);
+void	print_timer(struct timeval t0);
+time_t	get_timer(struct timeval t0);
 #endif
