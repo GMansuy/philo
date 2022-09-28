@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/28 16:05:16 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:43:23 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-enum e_status {thinking, eating, sleeping, dead};
+enum e_status {thinking, eating, sleeping, dead, waiting};
 enum e_group {pair, impair};
 enum e_action {init, grab, pose};
 
@@ -73,9 +73,10 @@ int		allocate_phi(t_data *data);
 int		allocate_forks(t_data *data);
 t_data	*get_struct(void);
 //launch_threads.c
-int		th_eat(t_phi *phi);
+int		th_eat(t_phi *phi, t_data *data);
 int		th_sleep(t_phi *phi);
 int		th_think(t_phi *phi);
+void	*th_wait(void *arg);
 //routines.c
 void	*think_routine(t_data *data, t_phi *phi);
 void	*eat_routine(void *arg);

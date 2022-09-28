@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:59:29 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/28 16:06:40 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:53:29 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ static int	prio_loop(t_data *data)
 	i = -1;
 	while (++i < data->number_of_philo)
 	{
-		if (data->phi[i].state == eating)
+		if (data->phi[i].state == waiting)
 		{
-			if (th_eat(&data->phi[i]) != 0)
+			data->phi[i].state = eating;
+			if (pthread_create(&data->phi[i].th, NULL,
+					&th_wait, NULL) != 0)
+				return (1);			
+		}
+		else if (data->phi[i].state == eating)
+		{
+			if (pthread_create(&data->phi[i].th, NULL,
+					&eat_routine, (void *)&data->phi[i]) != 0)
 				return (1);
 		}
 		else if (data->phi[i].state == sleeping)

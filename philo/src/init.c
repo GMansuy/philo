@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/28 16:05:52 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:39:44 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_phi(t_data *data)
 		if (i % 2 == 0)
 		{
 			data->phi[i].group = pair;
-			data->phi[i].state = sleeping;
+			data->phi[i].state = waiting;
 		}
 		else
 		{
