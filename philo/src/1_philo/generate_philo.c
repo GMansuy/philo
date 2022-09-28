@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:59:29 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/28 16:53:29 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 17:44:25 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 static int	join_threads(t_data *data)
 {
 	int	i;
-
+	int *ptr;
+	int signal;
+	
 	i = -1;
+	signal = 0;
 	while (++i < data->number_of_philo)
 	{
-		if (pthread_join(data->phi[i].th, NULL) != 0)
-			return (1);
+		if (pthread_join(data->phi[i].th, (void **)&ptr) != 0)
+			return (2);
+		if (ptr != NULL)
+			signal = 1;
 	}
-	return (0);
+	return (signal);
 }
 
 static int	prio_loop(t_data *data)
@@ -58,11 +63,10 @@ static int	prio_loop(t_data *data)
 static int	main_loop(t_data *data)
 {
 	init_mutex(data);
-	while (!data->death)
+	while (data->death)
 	{
 		prio_loop(data);
-		if (join_threads(data) != 0)
-			return (3);
+		data->death = join_threads(data);
 	}
 	destroy_mutex(data);
 	return (0);

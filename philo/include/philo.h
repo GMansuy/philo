@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/28 16:43:23 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/28 17:39:52 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ enum e_action {init, grab, pose};
 
 typedef struct s_phi
 {
-	pthread_t	th;
-	int			id;
-	int			state;
-	int			group;
+	pthread_t		th;
+	int				id;
+	int				state;
+	int				group;
+	struct timeval	hunger;
+	int				has_eaten;
 }	t_phi;
 
 typedef struct s_data
@@ -81,9 +83,13 @@ void	*th_wait(void *arg);
 void	*think_routine(t_data *data, t_phi *phi);
 void	*eat_routine(void *arg);
 void	*sleep_routine(void *arg);
+//death.c
+int		is_dead(t_phi *phi, t_data *data);
+void	set_death_timer(t_phi *phi);
 
 //set_forks.c
 int		set_forks(int action, int info);
+
 //DISPLAY
 //timer.c
 void	init_timer(struct timeval *t0);
