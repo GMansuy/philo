@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 20:02:30 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 20:15:15 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ int		philo_loop(t_data *data);
 //death.c
 void	*death_timer(void *death_arg);
 //actions.c
-void	pickup_forks(t_phi *phi);
-void	go_eat(t_phi *phi);
-void	go_sleep(t_phi *phi);
-void	go_think(t_phi *phi);
+int		pickup_forks(t_phi *phi);
+int		go_eat(t_phi *phi);
+int		go_sleep(t_phi *phi);
+int		go_think(t_phi *phi);
 
 //MONITORING
 //monitoring_loop.c
