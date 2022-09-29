@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:53:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 17:50:40 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 20:01:29 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	monitoring_loop(t_data *data)
 	i = -1;
 	while (1)
 	{
-		if (data->death == 1)
+		if (data->end_death == 1)
+			return (0);
+		if (data->end_eat == 1)
 			return (0);
 	}
 	return (0);

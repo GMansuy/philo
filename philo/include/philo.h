@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 17:41:13 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 20:02:30 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ typedef struct s_phi
 	int				id;
 	int				state;
 	int				group;
-	int				nbr_of_eat;
+	int				curr_eat;
+	int				max_eat;
 	int				has_eaten;
+	int				*end_eat;
 	int				*dead;
 }	t_phi;
 
@@ -54,8 +56,8 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_eat;
-	int				prio;
-	int				death;
+	int				end_death;
+	int				end_eat;
 	struct timeval	t0;
 }	t_data;
 
@@ -104,7 +106,7 @@ void	go_think(t_phi *phi);
 int		monitoring_loop(t_data *data);
 //timer.c
 void	init_timer(struct timeval *t0);
-void	print_timer(struct timeval t0);
+void	print_timer(t_phi *phi, struct timeval t0);
 void	print_action(t_phi *phi, char *str);
 time_t	get_timer(struct timeval t0);
 

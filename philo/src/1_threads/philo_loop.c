@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 18:00:19 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 19:57:33 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	*routine(void *phi_arg)
 	phi = (t_phi *)phi_arg;
 	while (1)
 	{
-		pickup_forks(phi);
-		go_eat(phi);
-		go_sleep(phi);
-		go_think(phi);
+		if (phi->state == eating)
+			go_eat(phi);
+		if (phi->state == sleeping)
+			go_sleep(phi);
+		if (phi->state == thinking)
+			go_think(phi);
 	}
 	return (NULL);
 }

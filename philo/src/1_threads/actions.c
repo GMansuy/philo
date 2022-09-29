@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:24:46 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 19:26:03 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 20:07:07 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,17 @@ void	go_eat(t_phi *phi)
 {
 	if (*(phi->dead))
 		exit(0);
+	pickup_forks(phi);
 	pthread_mutex_lock(phi->wait_monitoring);
 	print_action(phi, " is eating\n");
+	phi->curr_eat++;
+	if (phi->max_eat && phi->curr_eat >= phi->max_eat)
+		*(phi->dead) = 1;
 	pthread_mutex_unlock(phi->wait_monitoring);
 	usleep(phi->time_to_eat);
 	phi->has_eaten = 1;
 	forks_locker(phi, pose);
+	phi->state = sleeping;
 }
 
 void	go_sleep(t_phi *phi)
@@ -56,6 +61,7 @@ void	go_sleep(t_phi *phi)
 	print_action(phi, " is sleeping\n");
 	pthread_mutex_unlock(phi->wait_monitoring);
 	usleep(phi->time_to_sleep);
+	phi->state = thinking;
 }
 
 void	go_think(t_phi *phi)
@@ -70,4 +76,5 @@ void	go_think(t_phi *phi)
 	pthread_mutex_unlock(phi->wait_monitoring);
 	if (time_to_think > 0)
 		usleep(time_to_think);
+	phi->state = eating;
 }
