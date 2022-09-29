@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:24:46 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 16:55:51 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:58:36 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	forks_locker(t_phi *phi, int action)
 	else if (action == pose)
 	{
 		pthread_mutex_unlock(phi->left_fork);
-		pthread_mutex_unlock(phi->right_fork);		
+		pthread_mutex_unlock(phi->right_fork);
 	}
 }
 

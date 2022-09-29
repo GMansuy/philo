@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 16:49:16 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:58:00 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 }	t_data;
 
 //MAIN
-int	philo_loop(t_data *data);
+int		philo_loop(t_data *data);
 
 //UTILS
 //str.c
@@ -105,23 +105,5 @@ void	init_timer(struct timeval *t0);
 void	print_timer(struct timeval t0);
 void	print_action(t_phi *phi, char *str);
 time_t	get_timer(struct timeval t0);
-
-
-// //
-// //OLD
-// //generate_philo.c
-// int		generate_philo(t_data *data);
-// //launch_threads.c
-// int		th_eat(t_phi *phi, t_data *data);
-// int		th_sleep(t_phi *phi);
-// int		th_think(t_phi *phi);
-// void	*th_wait(void *arg);
-// //routines.c
-// void	*think_routine(t_data *data, t_phi *phi);
-// void	*eat_routine(void *arg);
-// void	*sleep_routine(void *arg);
-// //death.c
-// int		is_dead(t_phi *phi, t_data *data);
-// void	set_death_timer(t_phi *phi);
 
 #endif

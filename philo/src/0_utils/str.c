@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:26:32 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 16:13:05 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:06:31 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_timer(time_t time)
 size_t	ft_strlen(const char *s)
 {
 	int	i;
-	
+
 	i = 0;
 	while (s && s[i])
 		i++;
@@ -71,4 +71,3 @@ void	ft_putnbr_fd(int n, int fd)
 		nbr = (unsigned int) n;
 	putnbr(nbr, fd);
 }
-

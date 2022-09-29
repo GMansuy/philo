@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 16:53:05 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:06:03 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,26 @@ int	init_mutex(t_data *data)
 	return (0);
 }
 
+static void	phi_get_data(t_data *data, int i)
+{
+	int	last;
+
+	last = !(i == data->number_of_philo - 1);
+	data->phi[i].left_fork = &data->forks[i];
+	data->phi[i].right_fork = &data->forks[(i + 1) * last];
+	data->phi[i].t0 = &data->t0;
+	data->phi[i].wait_monitoring = &data->wait_monitoring;
+	data->phi[i].time_to_eat = data->time_to_eat * 1000;
+	data->phi[i].time_to_sleep = data->time_to_sleep * 1000;
+}
+
 void	init_phi(t_data *data)
 {
 	int	i;
-	int	last;
 
 	i = 0;
 	while (i < data->number_of_philo)
 	{
-		last = !(i == data->number_of_philo - 1);
 		data->phi[i].id = i;
 		if (i % 2 == 0)
 		{
@@ -47,12 +58,7 @@ void	init_phi(t_data *data)
 			data->phi[i].group = impair;
 			data->phi[i].state = eating;
 		}
-		data->phi[i].left_fork = &data->forks[i];
-		data->phi[i].right_fork = &data->forks[(i + 1) * last];
-		data->phi[i].t0 = &data->t0;
-		data->phi[i].wait_monitoring = &data->wait_monitoring;
-		data->phi[i].time_to_eat = data->time_to_eat * 1000;
-		data->phi[i].time_to_sleep = data->time_to_sleep * 1000;
+		phi_get_data(data, i);
 		i++;
 	}
 }
