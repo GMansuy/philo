@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:38:32 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 19:43:47 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 20:09:50 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*death_timer(void *death_arg)
 	t_phi	*phi;
 	time_t	timestamp_eat;
 	time_t	hunger;
-	
+
 	phi = (t_phi *)death_arg;
 	timestamp_eat = get_timer(*phi->t0);
 	while (1)
