@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 16:58:00 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:41:13 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ typedef struct s_phi
 	struct timeval	*t0;
 	int				time_to_eat;
 	int				time_to_sleep;
+	int				time_to_die;
 	int				id;
 	int				state;
 	int				group;
 	int				nbr_of_eat;
-	int				dead;
+	int				has_eaten;
+	int				*dead;
 }	t_phi;
 
 typedef struct s_data

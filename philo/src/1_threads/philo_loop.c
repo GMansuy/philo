@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 17:05:52 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 18:00:19 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ int	philo_loop(t_data *data)
 			return (5);
 	}
 	monitoring_loop(data);
-	destroy_mutex(data);
 	return (0);
 }

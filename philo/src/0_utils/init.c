@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 17:06:03 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 19:19:59 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ static void	phi_get_data(t_data *data, int i)
 	data->phi[i].wait_monitoring = &data->wait_monitoring;
 	data->phi[i].time_to_eat = data->time_to_eat * 1000;
 	data->phi[i].time_to_sleep = data->time_to_sleep * 1000;
+	data->phi[i].time_to_die = data->time_to_die * 1000;
+	data->phi[i].dead = &data->death;
+	data->phi[i].has_eaten = 0;
 }
 
 void	init_phi(t_data *data)
