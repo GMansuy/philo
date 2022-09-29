@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:35:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 10:02:59 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 15:44:20 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	get_int_from_args(char *str)
 {
 	long long	value;
 
-	if (get_len(str) > 11)
+	if (ft_strlen(str) > 11)
 		return (msg("Error : argument is too big\n"), 0);
 	value = ft_atol(str);
 	if (value > INT_MAX || value < INT_MIN)

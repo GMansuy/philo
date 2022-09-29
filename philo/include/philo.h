@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 14:56:57 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:49:16 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ typedef struct s_phi
 	pthread_t		time_th;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*wait_monitoring;
+	struct timeval	*t0;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				id;
 	int				state;
 	int				group;
@@ -42,10 +46,7 @@ typedef struct s_data
 {
 	t_phi			*phi;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	wait_eat;
-	pthread_mutex_t	wait_sleep;
-	pthread_mutex_t	wait_think;
-	pthread_mutex_t	wait_display;
+	pthread_mutex_t	wait_monitoring;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -59,7 +60,13 @@ typedef struct s_data
 //MAIN
 int	philo_loop(t_data *data);
 
-//UTLS
+//UTILS
+//str.c
+size_t	ft_strlen(const char *s);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_timer(time_t time);
+
 //init.c
 void	init_all(t_data *data);
 void	init_phi(t_data *data);
@@ -84,6 +91,11 @@ int		parsing(int argc, char **argv, t_data *data);
 int		philo_loop(t_data *data);
 //death.c
 void	*death_timer(void *death_arg);
+//actions.c
+void	pickup_forks(t_phi *phi);
+void	go_eat(t_phi *phi);
+void	go_sleep(t_phi *phi);
+void	go_think(t_phi *phi);
 
 //MONITORING
 //monitoring_loop.c
@@ -91,6 +103,7 @@ int		monitoring_loop(t_data *data);
 //timer.c
 void	init_timer(struct timeval *t0);
 void	print_timer(struct timeval t0);
+void	print_action(t_phi *phi, char *str);
 time_t	get_timer(struct timeval t0);
 
 

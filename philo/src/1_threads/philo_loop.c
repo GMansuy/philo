@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 15:19:57 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:38:21 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void *routine(void *phi_arg)
 	t_phi	*phi;
 
 	phi = (t_phi *)phi_arg;
+	while (1)
+	{
+		pickup_forks(phi);
+		go_eat(phi);
+		go_sleep(phi);
+		go_think(phi);
+	}
 	return (NULL);
 }
 
@@ -38,7 +45,7 @@ int	philo_loop(t_data *data)
 		if (pthread_detach(data->phi[i].time_th))
 			return (5);
 	}
-	destroy_mutex(data);
 	monitoring_loop(data);
+	destroy_mutex(data);
 	return (0);
 }

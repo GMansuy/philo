@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 12:28:15 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:53:05 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,8 @@ int	init_mutex(t_data *data)
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 			return (1);
 	}
-	if (pthread_mutex_init(&data->wait_eat, NULL) != 0)
+	if (pthread_mutex_init(&data->wait_monitoring, NULL) != 0)
 		return (2);
-	if (pthread_mutex_init(&data->wait_sleep, NULL) != 0)
-		return (3);
-	if (pthread_mutex_init(&data->wait_think, NULL) != 0)
-		return (4);
-	if (pthread_mutex_init(&data->wait_display, NULL) != 0)
-		return (5);
 	return (0);
 }
 
@@ -55,6 +49,10 @@ void	init_phi(t_data *data)
 		}
 		data->phi[i].left_fork = &data->forks[i];
 		data->phi[i].right_fork = &data->forks[(i + 1) * last];
+		data->phi[i].t0 = &data->t0;
+		data->phi[i].wait_monitoring = &data->wait_monitoring;
+		data->phi[i].time_to_eat = data->time_to_eat * 1000;
+		data->phi[i].time_to_sleep = data->time_to_sleep * 1000;
 		i++;
 	}
 }

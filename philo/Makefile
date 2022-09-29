@@ -23,8 +23,10 @@ SRC_FILES 	=	main \
 				0_utils/msg \
 				0_utils/free \
 				0_utils/parsing \
+				0_utils/str \
 				1_threads/philo_loop \
 				1_threads/death_timer \
+				1_threads/actions \
 				2_monitoring/timer \
 				2_monitoring/monitoring_loop \
 
