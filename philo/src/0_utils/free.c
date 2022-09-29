@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 15:52:26 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 14:55:50 by gmansuy          ###   ########.fr       */
+/*   Created: 2022/09/26 17:08:13 by gmansuy           #+#    #+#             */
+/*   Updated: 2022/09/29 15:19:43 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+void	destroy_mutex(t_data *data)
 {
-	t_data	data;
+	int	i;
 
-	init_all(&data);
-	if (parsing(argc, argv, &data) != 0)
-		return (1);
-	init_timer(&data.t0);
-	if (alloc_data(&data) != 0)
-		return (free_all(&data), 2);
-	init_phi(&data);
-	if (philo_loop(&data) != 0)
-		return (free_all(&data), 3);
-	return (free_all(&data), 0);
+	i = -1;
+	while (++i < data->number_of_philo)
+		pthread_mutex_destroy(&data->forks[i]);
+	pthread_mutex_destroy(&data->wait_eat);
+	pthread_mutex_destroy(&data->wait_sleep);
+	pthread_mutex_destroy(&data->wait_think);
+	pthread_mutex_destroy(&data->wait_display);
+}
+
+void	free_all(t_data *philo)
+{
+	free(philo->phi);
+	free(philo->forks);
 }

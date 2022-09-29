@@ -8,7 +8,7 @@ SRC_DIR		= src/
 OBJ_DIR		= obj/
 BONUS_DIR	= src_bonus/
 
-CC			= gcc
+CC			= cc
 CFLAGS		= -Wall -Werror -Wextra -g -pthread -I./include -MMD -MP
 
 RM			= rm -rf
@@ -18,21 +18,20 @@ SAN			= -fsanitize=address
 # SOURCES
 
 SRC_FILES 	=	main \
-				init \
-				msg \
-				free \
-				0_parsing/parsing \
-				1_philo/generate_philo \
-				1_philo/routines \
-				1_philo/get_data \
-				1_philo/launch_threads \
-				1_philo/death \
-				2_display/timer \
+				0_utils/init \
+				0_utils/alloc \
+				0_utils/msg \
+				0_utils/free \
+				0_utils/parsing \
+				1_threads/philo_loop \
+				1_threads/death_timer \
+				2_monitoring/timer \
+				2_monitoring/monitoring_loop \
 
 ALL_DIRS	=	$(OBJ_DIR) \
-				$(OBJ_DIR)/0_parsing \
-				$(OBJ_DIR)/1_philo \
-				$(OBJ_DIR)/2_display \
+				$(OBJ_DIR)/0_utils \
+				$(OBJ_DIR)/1_threads \
+				$(OBJ_DIR)/2_monitoring \
 
 C_FILES		=	$(addsuffix .c, $(SRC_FILES))
 SRCS 		=	$(addprefix $(SRC_DIR), $(C_FILES))

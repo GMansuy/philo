@@ -32,3 +32,6 @@ La boucle est conditionnée par un usleep();
 Il faut trouver la bonne valeur de time_to_think pour que les philo puissent manger dès que possible.  -->
 
 forks => tableau de mutex (static)
+
+ 
+| 0 | 0 | 0 | 0 | 0

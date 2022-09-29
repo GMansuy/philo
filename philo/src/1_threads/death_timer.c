@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   death_timer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 15:52:26 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 14:55:50 by gmansuy          ###   ########.fr       */
+/*   Created: 2022/09/29 14:38:32 by gmansuy           #+#    #+#             */
+/*   Updated: 2022/09/29 14:42:38 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
-int	main(int argc, char **argv)
+void	*death_timer(void *death_arg)
 {
-	t_data	data;
+	t_phi	*phi;
 
-	init_all(&data);
-	if (parsing(argc, argv, &data) != 0)
-		return (1);
-	init_timer(&data.t0);
-	if (alloc_data(&data) != 0)
-		return (free_all(&data), 2);
-	init_phi(&data);
-	if (philo_loop(&data) != 0)
-		return (free_all(&data), 3);
-	return (free_all(&data), 0);
+	phi = (t_phi *)death_arg;
+	return (NULL);
 }
