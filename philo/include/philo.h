@@ -27,6 +27,7 @@ enum e_action {init, grab, pose};
 
 typedef struct s_phi
 {
+	int				id;
 	pthread_t		th;
 	pthread_t		time_th;
 	pthread_mutex_t	*right_fork;
@@ -36,14 +37,13 @@ typedef struct s_phi
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				time_to_die;
-	int				id;
 	int				state;
 	int				group;
 	int				curr_eat;
 	int				max_eat;
 	int				has_eaten;
-	int				*end_eat;
-	int				*dead;
+	int				stop;
+	int				dead;
 }	t_phi;
 
 typedef struct s_data
@@ -56,8 +56,6 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_eat;
-	int				end_death;
-	int				end_eat;
 	struct timeval	t0;
 }	t_data;
 
@@ -67,9 +65,9 @@ int		philo_loop(t_data *data);
 //UTILS
 //str.c
 size_t	ft_strlen(const char *s);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_timer(time_t time);
+void	ft_putnbr_fd(int n, int fd, t_phi *phi);
+void	ft_putstr_fd(char *s, int fd, t_phi *phi);
+void	ft_timer(time_t time, t_phi *phi);
 
 //init.c
 void	init_all(t_data *data);

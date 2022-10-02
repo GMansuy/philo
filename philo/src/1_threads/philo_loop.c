@@ -19,12 +19,12 @@ void	*routine(void *phi_arg)
 	phi = (t_phi *)phi_arg;
 	while (1)
 	{
-		if (phi->state == eating)
-			go_eat(phi);
-		if (phi->state == sleeping)
-			go_sleep(phi);
-		if (phi->state == thinking)
-			go_think(phi);
+		if (phi->state == eating && go_eat(phi) != 0)
+			return (NULL);
+		if (phi->state == sleeping && go_sleep(phi) != 0)
+			return (NULL);
+		if (phi->state == thinking && go_think(phi) != 0)
+			return (NULL);
 	}
 	return (NULL);
 }
@@ -44,10 +44,6 @@ int	philo_loop(t_data *data)
 		if (pthread_create(&data->phi[i].time_th, NULL, &death_timer,
 				&data->phi[i]) != 0)
 			return (3);
-		if (pthread_detach(data->phi[i].th))
-			return (4);
-		if (pthread_detach(data->phi[i].time_th))
-			return (5);
 	}
 	monitoring_loop(data);
 	return (0);
