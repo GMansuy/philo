@@ -6,15 +6,13 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:53:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 17:44:21 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 18:21:14 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 int		death_condition(t_phi *phi, time_t timestamp_eat, time_t hunger)
 {
-		if (phi->stop)
-			return (pthread_mutex_unlock(phi->wait_eat), NULL);
 		if (phi->has_eaten == 1)
 		{
 			hunger = 0;
@@ -25,11 +23,9 @@ int		death_condition(t_phi *phi, time_t timestamp_eat, time_t hunger)
 		}
 		if (hunger - timestamp_eat > phi->time_to_die / 1000)
 		{
-			pthread_mutex_lock(phi->wait_monitoring);
-			print_action(phi, " has died\n");
+			print_action(phi, " died\n");
 			phi->dead = 1;
-			pthread_mutex_unlock(phi->wait_monitoring);
-			return (pthread_mutex_unlock(phi->wait_eat), 1);
+			return (1);
 		}
 		return (0);
 }
@@ -45,9 +41,11 @@ void	*death_timer(void *death_arg)
 	while (1)
 	{
 		pthread_mutex_lock(phi->wait_eat);
+		if (phi->stop)
+			return (pthread_mutex_unlock(phi->wait_eat), NULL);
 		hunger = get_timer(*phi->t0);
 		if (death_condition(phi, timestamp_eat, hunger) != 0)
-			return (NULL);
+			return (pthread_mutex_unlock(phi->wait_eat), NULL);
 		pthread_mutex_unlock(phi->wait_eat);
 	}
 	return (NULL);
