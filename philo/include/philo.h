@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 11:45:06 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 13:40:56 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ int		parsing(int argc, char **argv, t_data *data);
 //THREADS
 //philo_loop.c
 int		philo_loop(t_data *data);
-//death.c
-void	*death_timer(void *death_arg);
 //actions.c
 int		pickup_forks(t_phi *phi);
 int		go_eat(t_phi *phi);
@@ -104,6 +102,7 @@ int		go_think(t_phi *phi);
 
 //MONITORING
 //monitoring_loop.c
+void	*death_timer(void *death_arg);
 int		monitoring_loop(t_data *data);
 //timer.c
 void	init_timer(struct timeval *t0);

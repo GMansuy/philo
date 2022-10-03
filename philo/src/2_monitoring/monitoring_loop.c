@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:53:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 12:11:29 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 14:16:07 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	*death_timer(void *death_arg)
 
 	phi = (t_phi *)death_arg;
 	timestamp_eat = get_timer(*phi->t0);
-	while (!phi->stop)
+	while (1)
 	{
 		hunger = get_timer(*phi->t0);
 		pthread_mutex_lock(phi->wait_eat);
+		if (phi->stop)
+			return (pthread_mutex_unlock(phi->wait_eat), NULL);
 		if (phi->has_eaten == 1)
 		{
 			hunger = 0;
