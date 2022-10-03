@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/30 10:51:21 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 11:45:06 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,25 @@ enum e_action {init, grab, pose};
 
 typedef struct s_phi
 {
+	int				id;
 	pthread_t		th;
 	pthread_t		time_th;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*wait_monitoring;
+	pthread_mutex_t	*wait_eat;
 	struct timeval	*t0;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				time_to_die;
-	int				id;
 	int				state;
 	int				group;
+	int				number_of_philo;
 	int				curr_eat;
 	int				max_eat;
 	int				has_eaten;
-	int				*end_eat;
-	int				*dead;
+	int				stop;
+	int				dead;
 }	t_phi;
 
 typedef struct s_data
@@ -51,13 +53,12 @@ typedef struct s_data
 	t_phi			*phi;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	wait_monitoring;
+	pthread_mutex_t	wait_eat;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_eat;
-	int				end_death;
-	int				end_eat;
 	struct timeval	t0;
 }	t_data;
 

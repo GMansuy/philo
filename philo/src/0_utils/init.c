@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/30 10:46:24 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 12:04:55 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	init_mutex(t_data *data)
 	}
 	if (pthread_mutex_init(&data->wait_monitoring, NULL) != 0)
 		return (2);
+	if (pthread_mutex_init(&data->wait_eat, NULL) != 0)
+		return (2);
 	return (0);
 }
 
@@ -36,13 +38,16 @@ static void	phi_get_data(t_data *data, int i)
 	data->phi[i].right_fork = &data->forks[(i + 1) * last];
 	data->phi[i].t0 = &data->t0;
 	data->phi[i].wait_monitoring = &data->wait_monitoring;
+	data->phi[i].wait_eat = &data->wait_eat;
 	data->phi[i].time_to_eat = data->time_to_eat * 1000;
 	data->phi[i].time_to_sleep = data->time_to_sleep * 1000;
 	data->phi[i].time_to_die = data->time_to_die * 1000;
-	data->phi[i].dead = &data->end_death;
+	data->phi[i].number_of_philo = data->number_of_philo;
+	data->phi[i].dead = 0;
 	data->phi[i].has_eaten = 0;
 	data->phi[i].max_eat = data->number_of_eat;
 	data->phi[i].curr_eat = 0;
+	data->phi[i].stop = 0;
 }
 
 void	init_phi(t_data *data)
@@ -53,7 +58,7 @@ void	init_phi(t_data *data)
 	while (i < data->number_of_philo)
 	{
 		data->phi[i].id = i;
-		if (i % 2 == 0)
+		if (i % 2 == 0 && data->number_of_philo != 1)
 		{
 			data->phi[i].group = pair;
 			data->phi[i].state = thinking;
@@ -75,7 +80,6 @@ void	init_all(t_data *data)
 	data->time_to_eat = 0;
 	data->time_to_sleep = 0;
 	data->number_of_eat = 0;
-	data->end_death = 0;
 	data->forks = NULL;
 	data->phi = NULL;
 }

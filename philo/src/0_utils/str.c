@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:26:32 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/30 10:54:01 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 10:45:55 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	ft_timer(time_t time, t_phi *phi)
 		ft_timer(time / 10, phi);
 	}
 	c = (time % 10) + '0';
-	if (!*(phi->dead))
-		write(1, &c, 1);
+	write(1, &c, !phi->stop);
 }
 
 size_t	ft_strlen(const char *s)
@@ -44,8 +43,7 @@ void	ft_putstr_fd(char *s, int fd, t_phi *phi)
 	len = 0;
 	while (s[len])
 		len++;
-	if (!*(phi->dead))
-		write(fd, s, len);
+	write(fd, s, len * !phi->stop);
 }
 
 static void	putnbr(unsigned int nbr, int fd, t_phi *phi)
@@ -57,8 +55,7 @@ static void	putnbr(unsigned int nbr, int fd, t_phi *phi)
 		putnbr(nbr / 10, fd, phi);
 	}
 	c = (nbr % 10) + '0';
-	if (!*(phi->dead))
-		write(fd, &c, 1);
+	write(fd, &c, !phi->stop);
 }
 
 void	ft_putnbr_fd(int n, int fd, t_phi *phi)

@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/30 11:59:26 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 10:49:16 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	*routine(void *phi_arg)
 	while (1)
 	{
 		if (phi->state == eating && go_eat(phi) != 0)
-				return (NULL);
+			return (NULL);
 		if (phi->state == sleeping && go_sleep(phi) != 0)
-				return (NULL);
+			return (NULL);
 		if (phi->state == thinking && go_think(phi) != 0)
-				return (NULL);
+			return (NULL);
 	}
 	return (NULL);
 }
@@ -44,12 +44,7 @@ int	philo_loop(t_data *data)
 		if (pthread_create(&data->phi[i].time_th, NULL, &death_timer,
 				&data->phi[i]) != 0)
 			return (3);
-		if (pthread_detach(data->phi[i].th))
-			return (4);
-		if (pthread_detach(data->phi[i].time_th))
-			return (5);
 	}
 	monitoring_loop(data);
-	printf("end\n");
 	return (0);
 }

@@ -9,7 +9,7 @@ OBJ_DIR		= obj/
 BONUS_DIR	= src_bonus/
 
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra -g -pthread -I./include -MMD -MP
+CFLAGS		= -Wall -Werror -Wextra -g -pthread -I./include -MMD -MP -fsanitize=thread
 
 RM			= rm -rf
 AR			= ar rcs
@@ -25,7 +25,6 @@ SRC_FILES 	=	main \
 				0_utils/parsing \
 				0_utils/str \
 				1_threads/philo_loop \
-				1_threads/death_timer \
 				1_threads/actions \
 				2_monitoring/timer \
 				2_monitoring/monitoring_loop \
