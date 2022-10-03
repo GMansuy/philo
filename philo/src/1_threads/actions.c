@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:24:46 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 14:15:58 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 17:40:37 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	forks_locker(t_phi *phi, int action)
 {
-	if (action == grab && !phi->stop)
+	if (action == grab)
 	{
 		pthread_mutex_lock(phi->left_fork);
 		pthread_mutex_lock(phi->wait_monitoring);
@@ -29,18 +29,19 @@ static int	forks_locker(t_phi *phi, int action)
 	}
 	else if (action == pose)
 	{
-		pthread_mutex_unlock(phi->left_fork);
 		if (phi->number_of_philo != 1)
 			pthread_mutex_unlock(phi->right_fork);
+		pthread_mutex_unlock(phi->left_fork);
 	}
-	return (phi->stop);
+	return (0);
 }
 
 int	go_eat(t_phi *phi)
 {
 	pthread_mutex_lock(phi->wait_eat);
 	if (phi->stop)
-		return (forks_locker(phi, pose), pthread_mutex_unlock(phi->wait_eat), 1);
+		return (forks_locker(phi, pose),
+			pthread_mutex_unlock(phi->wait_eat), 1);
 	pthread_mutex_unlock(phi->wait_eat);
 	if (forks_locker(phi, grab) != 0)
 		return (forks_locker(phi, pose), 1);
@@ -79,6 +80,7 @@ int	go_sleep(t_phi *phi)
 int	go_think(t_phi *phi)
 {
 	int	time_to_think;
+
 	pthread_mutex_lock(phi->wait_eat);
 	if (phi->stop)
 		return (pthread_mutex_unlock(phi->wait_eat), 1);

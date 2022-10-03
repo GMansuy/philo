@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 12:04:55 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 17:39:59 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ void	init_phi(t_data *data)
 		if (i % 2 == 0 && data->number_of_philo != 1)
 		{
 			data->phi[i].group = pair;
-			data->phi[i].state = thinking;
+			data->phi[i].state = eating;
 		}
 		else
 		{
 			data->phi[i].group = impair;
-			data->phi[i].state = eating;
+			data->phi[i].state = sleeping;
 		}
 		phi_get_data(data, i);
 		i++;

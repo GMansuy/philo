@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:23:09 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 13:30:06 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/03 16:58:23 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	print_timer(t_phi *phi, struct timeval t0)
 
 void	print_action(t_phi *phi, char *str)
 {
-	// pthread_mutex_lock(phi->wait_eat);
+	pthread_mutex_lock(phi->wait_monitoring);
 	print_timer(phi, *(phi->t0));
 	ft_putnbr_fd(phi->id + 1, 1, phi);
 	ft_putstr_fd(str, 1, phi);
-	// pthread_mutex_unlock(phi->wait_eat);
+	pthread_mutex_unlock(phi->wait_monitoring);
 }
 
 void	init_timer(struct timeval *t0)
