@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 20:15:15 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/30 10:51:21 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int		philo_loop(t_data *data);
 //UTILS
 //str.c
 size_t	ft_strlen(const char *s);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_timer(time_t time);
+void	ft_putnbr_fd(int n, int fd, t_phi *phi);
+void	ft_putstr_fd(char *s, int fd, t_phi *phi);
+void	ft_timer(time_t time, t_phi *phi);
 
 //init.c
 void	init_all(t_data *data);

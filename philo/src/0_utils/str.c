@@ -6,22 +6,23 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:26:32 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/09/29 17:09:16 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/09/30 10:54:01 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-void	ft_timer(time_t time)
+void	ft_timer(time_t time, t_phi *phi)
 {
 	char	c;
 
 	if (time > 9)
 	{
-		ft_timer(time / 10);
+		ft_timer(time / 10, phi);
 	}
 	c = (time % 10) + '0';
-	write(1, &c, 1);
+	if (!*(phi->dead))
+		write(1, &c, 1);
 }
 
 size_t	ft_strlen(const char *s)
@@ -34,7 +35,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd, t_phi *phi)
 {
 	int	len;
 
@@ -43,22 +44,24 @@ void	ft_putstr_fd(char *s, int fd)
 	len = 0;
 	while (s[len])
 		len++;
-	write(fd, s, len);
+	if (!*(phi->dead))
+		write(fd, s, len);
 }
 
-static void	putnbr(unsigned int nbr, int fd)
+static void	putnbr(unsigned int nbr, int fd, t_phi *phi)
 {
 	char	c;
 
 	if (nbr > 9)
 	{
-		putnbr(nbr / 10, fd);
+		putnbr(nbr / 10, fd, phi);
 	}
 	c = (nbr % 10) + '0';
-	write(fd, &c, 1);
+	if (!*(phi->dead))
+		write(fd, &c, 1);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd, t_phi *phi)
 {
 	unsigned int	nbr;
 
@@ -69,5 +72,5 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		nbr = (unsigned int) n;
-	putnbr(nbr, fd);
+	putnbr(nbr, fd, phi);
 }
