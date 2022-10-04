@@ -6,22 +6,27 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:26:32 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 10:45:55 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:42:01 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-void	ft_timer(time_t time, t_phi *phi)
+char	*philo_display(int time, char *str, int phid)
 {
-	char	c;
+	char 	*time_string;
+	char 	*phid_string;
+	char	*tmp_display;
+	char	*display;
 
-	if (time > 9)
-	{
-		ft_timer(time / 10, phi);
-	}
-	c = (time % 10) + '0';
-	write(1, &c, !phi->stop);
+	time_string = ft_itoa(time);
+	phid_string = ft_itoa(phid);
+	tmp_display = ft_strjoin(time_string, phid_string);
+	display = ft_strjoin(tmp_display, str);
+	free(time_string);
+	free(phid_string);
+	free(tmp_display);
+	return (display);
 }
 
 size_t	ft_strlen(const char *s)

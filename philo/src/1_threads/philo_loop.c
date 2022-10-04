@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/04 16:40:05 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:42:54 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,20 @@ void	*routine(void *phi_arg)
 	phi = (t_phi *)phi_arg;
 	if (pthread_create(&phi->time_th, NULL, &death_timer, phi) != 0)
 			return (NULL);
-	// print_action(phi, " --- created !---\n");
+	if (phi->group == impair)
+		usleep(phi->args.time_to_eat);
 	while (1)
 	{
-		if (phi->state == eating && go_eat(phi) != 0)
+		if (go_eat(phi) != 0)
 			return (NULL);
-		if (phi->state == sleeping && go_sleep(phi) != 0)
+		if (go_sleep(phi) != 0)
 			return (NULL);
-		if (phi->state == thinking && go_think(phi) != 0)
+		if (go_think(phi) != 0)
 			return (NULL);
+		pthread_mutex_lock(phi->wait.wait_stop);
+		if (phi->stop)
+			return (pthread_mutex_unlock(phi->wait.wait_stop), NULL);
+		pthread_mutex_unlock(phi->wait.wait_stop);
 	}
 	return (NULL);
 }
