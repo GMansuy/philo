@@ -6,21 +6,21 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:53:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/04 12:31:55 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/04 15:30:47 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 int		death_condition(t_phi *phi, time_t *timestamp_eat, time_t *hunger)
 {
+		pthread_mutex_lock(phi->wait_eat);
 		if (phi->has_eaten == 1)
 		{
 			*hunger = 0;
-			pthread_mutex_lock(phi->wait_monitoring);
 			phi->has_eaten = 0;
-			pthread_mutex_unlock(phi->wait_monitoring);
 			*timestamp_eat = get_timer(*phi->t0);
 		}
+		pthread_mutex_unlock(phi->wait_eat);
 		if (*hunger - *timestamp_eat > phi->time_to_die / 1000)
 		{
 			phi->dead = 1;
@@ -39,13 +39,13 @@ void	*death_timer(void *death_arg)
 	timestamp_eat = get_timer(*phi->t0);
 	while (1)
 	{
-		pthread_mutex_lock(phi->wait_eat);
+		pthread_mutex_lock(phi->wait_stop);
 		if (phi->stop)
-			return (pthread_mutex_unlock(phi->wait_eat), NULL);
+			return (pthread_mutex_unlock(phi->wait_stop), NULL);
+		pthread_mutex_unlock(phi->wait_stop);
 		hunger = get_timer(*phi->t0);
 		if (death_condition(phi, &timestamp_eat, &hunger) != 0)
 			return (pthread_mutex_unlock(phi->wait_eat), NULL);
-		pthread_mutex_unlock(phi->wait_eat);
 	}
 	return (NULL);
 }
@@ -70,9 +70,10 @@ int	stop_threads(t_data *data)
 	int	j;
 
 	j = -1;
+	pthread_mutex_lock(&data->wait_stop);
 	while (++j < data->number_of_philo)
 		data->phi[j].stop = 1;
-	pthread_mutex_unlock(&data->wait_eat);
+	pthread_mutex_unlock(&data->wait_stop);
 	if (join_phi(data) != 0)
 		return (1);
 	return (0);
@@ -94,8 +95,8 @@ int	monitoring_loop(t_data *data)
 				enough_meals = 0;
 			if (data->phi[i].dead == 1)
 			{
-				print_action(&data->phi[i], "\033[0;31m died\n\033[0;37m");
-				return (stop_threads(data));
+				print_action(&data->phi[i], " died\n");
+				return (pthread_mutex_unlock(&data->wait_eat), stop_threads(data));
 				if (join_phi(data) != 0)
 					return (1);
 				return (0);
@@ -104,7 +105,7 @@ int	monitoring_loop(t_data *data)
 		}
 		pthread_mutex_lock(&data->wait_eat);
 		if (enough_meals == 1)
-			return (stop_threads(data));
+			return (pthread_mutex_unlock(&data->wait_eat), stop_threads(data));
 		pthread_mutex_unlock(&data->wait_eat);
 	}
 	return (0);

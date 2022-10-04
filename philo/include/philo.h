@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/04 11:40:40 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:34:36 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_phi
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*wait_monitoring;
 	pthread_mutex_t	*wait_eat;
+	pthread_mutex_t	*wait_stop;
 	struct timeval	*t0;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -54,6 +55,7 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	wait_monitoring;
 	pthread_mutex_t	wait_eat;
+	pthread_mutex_t	wait_stop;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;

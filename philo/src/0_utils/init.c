@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/04 11:41:59 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/04 16:33:44 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	init_mutex(t_data *data)
 		return (2);
 	if (pthread_mutex_init(&data->wait_eat, NULL) != 0)
 		return (2);
+	if (pthread_mutex_init(&data->wait_stop, NULL) != 0)
+		return (2);
 	return (0);
 }
 
@@ -39,6 +41,7 @@ static void	phi_get_data(t_data *data, int i)
 	data->phi[i].t0 = &data->t0;
 	data->phi[i].wait_monitoring = &data->wait_monitoring;
 	data->phi[i].wait_eat = &data->wait_eat;
+	data->phi[i].wait_stop = &data->wait_stop;
 	data->phi[i].time_to_eat = data->time_to_eat * 1000;
 	data->phi[i].time_to_sleep = data->time_to_sleep * 1000;
 	data->phi[i].time_to_die = data->time_to_die * 1000;
@@ -66,7 +69,7 @@ void	init_phi(t_data *data)
 		else
 		{
 			data->phi[i].group = impair;
-			data->phi[i].state = sleeping;
+			data->phi[i].state = eating;
 		}
 		phi_get_data(data, i);
 		i++;
