@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 18:13:06 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:27:20 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	philo_loop(t_data *data)
 	i = -1;
 	if (init_mutex(data) != 0)
 		return (1);
+	init_timer(&data->t0);
 	while (++i < data->number_of_philo)
 	{
 		if (pthread_create(&data->phi[i].th, NULL, &routine,

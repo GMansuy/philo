@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:24:46 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 18:16:10 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:35:58 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	go_eat(t_phi *phi)
 	phi->curr_eat++;
 	pthread_mutex_lock(phi->wait_eat);
 	if (phi->max_eat && phi->curr_eat >= phi->max_eat)
-		return (forks_locker(phi, pose), phi->dead = 1,
+		return (forks_locker(phi, pose),
 			pthread_mutex_unlock(phi->wait_eat), 1);
+	phi->has_eaten = 1;
 	pthread_mutex_unlock(phi->wait_eat);
 	usleep(phi->time_to_eat);
 	pthread_mutex_lock(phi->wait_eat);
-	phi->has_eaten = 1;
 	forks_locker(phi, pose);
 	phi->state = sleeping;
 	pthread_mutex_unlock(phi->wait_eat);
