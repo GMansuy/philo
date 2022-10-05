@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 14:16:48 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:42:10 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	phi_get_data(t_data *data, int i)
 	data->phi[i].wait.wait_eat = &data->wait_eat;
 	data->phi[i].wait.wait_stop = &data->wait_stop;
 	data->phi[i].wait.stop = 0;
-	data->phi[i].args.time_to_eat = data->time_to_eat * 1000;
-	data->phi[i].args.time_to_sleep = data->time_to_sleep * 1000;
-	data->phi[i].args.time_to_die = data->time_to_die * 1000;
+	data->phi[i].args.time_to_eat = data->time_to_eat;
+	data->phi[i].args.time_to_sleep = data->time_to_sleep;
+	data->phi[i].args.time_to_die = data->time_to_die;
 	data->phi[i].args.number_of_philo = data->number_of_philo;
 	data->phi[i].args.max_eat = data->number_of_eat;
 	data->phi[i].dead = 0;

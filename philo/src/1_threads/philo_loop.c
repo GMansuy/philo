@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 14:08:51 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:43:09 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	impair_th_loop(t_data *data)
 	
 	i = -1;
 	magic_usleep(data->time_to_eat, data->t0, &data->phi[0].wait);
-	printf("started\n");
 	while (++i < data->number_of_philo)
 	{
 		if (data->phi[i].group == impair && pthread_create(&data->phi[i].th, NULL,

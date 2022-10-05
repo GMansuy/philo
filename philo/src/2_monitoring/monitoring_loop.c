@@ -6,50 +6,11 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:53:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 14:08:45 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:45:00 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
-// int		death_condition(t_phi *phi, time_t *timestamp_eat, time_t *hunger)
-// {
-// 		pthread_mutex_lock(phi->wait.wait_eat);
-// 		if (phi->has_eaten == 1)
-// 		{
-// 			*hunger = 0;
-// 			phi->has_eaten = 0;
-// 			*timestamp_eat = get_timer(*phi->t0);
-// 		}
-// 		pthread_mutex_unlock(phi->wait.wait_eat);
-// 		if (*hunger - *timestamp_eat > phi->args.time_to_die / 1000)
-// 		{
-// 			phi->dead = 1;
-// 			return (1);
-// 		}
-// 		return (0);
-// }
-
-// void	*death_timer(void *death_arg)
-// {
-// 	t_phi	*phi;
-// 	time_t	timestamp_eat;
-// 	time_t	hunger;
-
-// 	phi = (t_phi *)death_arg;
-// 	usleep(phi->args.number_of_philo * 10);
-// 	timestamp_eat = get_timer(*phi->t0);
-// 	while (1)
-// 	{
-// 		pthread_mutex_lock(phi->wait.wait_stop);
-// 		if (phi->stop)
-// 			return (pthread_mutex_unlock(phi->wait.wait_stop), NULL);
-// 		pthread_mutex_unlock(phi->wait.wait_stop);
-// 		hunger = get_timer(*phi->t0);
-// 		if (death_condition(phi, &timestamp_eat, &hunger) != 0)
-// 			return (pthread_mutex_unlock(phi->wait.wait_eat), NULL);
-// 	}
-// 	return (NULL);
-// }
 
 int	stop_threads(t_data *data)
 {
@@ -69,7 +30,7 @@ int	is_dead(t_phi *phi)
 	time_t current_timer;
 
 	current_timer = get_timer(*phi->t0);
-	if ((int)current_timer - (int)phi->last_meal > phi->args.time_to_die / 1000)
+	if ((int)current_timer - (int)phi->last_meal > phi->args.time_to_die)
 		return (1);
 	return (0);
 }
