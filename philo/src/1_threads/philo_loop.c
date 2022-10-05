@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 16:11:51 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:44:41 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	*routine(void *phi_arg)
 int	impair_th_loop(t_data *data)
 {
 	int	i;
-	
+
 	i = -1;
 	magic_usleep(data->time_to_eat, data->t0, &data->phi[0].wait);
 	while (++i < data->number_of_philo)
 	{
-		if (data->phi[i].group == impair && pthread_create(&data->phi[i].th, NULL,
-			&routine, &data->phi[i]) != 0)
+		if (data->phi[i].group == impair && pthread_create(&data->phi[i].th,
+				NULL, &routine, &data->phi[i]) != 0)
 			return (1);
 	}
 	return (0);
@@ -64,12 +64,12 @@ int	impair_th_loop(t_data *data)
 int	pair_th_loop(t_data *data)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < data->number_of_philo)
 	{
 		if (data->phi[i].group == pair && pthread_create(&data->phi[i].th, NULL,
-			&routine, &data->phi[i]) != 0)
+				&routine, &data->phi[i]) != 0)
 			return (1);
 	}
 	return (0);
@@ -78,7 +78,7 @@ int	pair_th_loop(t_data *data)
 int	philo_loop(t_data *data)
 {
 	int	i;
-	
+
 	i = -1;
 	if (init_mutex(data) != 0)
 		return (1);

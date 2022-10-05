@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:53:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 16:40:54 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:48:20 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	stop_threads(t_data *data)
 
 int	is_dead(t_phi *phi)
 {
-	time_t current_timer;
+	time_t	current_timer;
 
 	current_timer = get_timer(*phi->t0);
 	pthread_mutex_lock(phi->wait.wait_eat);
@@ -48,14 +48,15 @@ int	monitoring_loop(t_data *data)
 		while (++i < data->number_of_philo)
 		{
 			pthread_mutex_lock(&data->wait_eat);
-			if (data->phi[i].curr_eat < data->number_of_eat)
-				enough_meals = 0;
+			enough_meals = (data->phi[i].curr_eat < data->number_of_eat);
 			pthread_mutex_unlock(&data->wait_eat);
 			if (is_dead(&data->phi[i]) == 1)
 			{
 				pthread_mutex_lock(&data->wait_monitoring);
-				print_end(data->t0, "died\n", data->phi[i].id, &data->phi[i].wait);
-				return (pthread_mutex_unlock(&data->wait_eat), stop_threads(data));
+				print_end(data->t0, "died\n", data->phi[i].id,
+					&data->phi[i].wait);
+				return (pthread_mutex_unlock(&data->wait_eat),
+					stop_threads(data));
 			}
 		}
 		if (enough_meals == 1)

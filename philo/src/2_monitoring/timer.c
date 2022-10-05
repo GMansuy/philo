@@ -6,11 +6,37 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:23:09 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 15:46:25 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:46:28 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
+
+void	print_action(struct timeval time, char *str, int phid, t_wait *w)
+{
+	pthread_mutex_lock(w->wait_monitoring);
+	if (!w->stop)
+	{
+		ft_putnbr_fd((int)get_timer(time), 1);
+		write(1, " ", 1);
+		ft_putnbr_fd(phid + 1, 1);
+		write(1, " ", 1);
+		ft_putstr_fd(str, 1);
+	}
+	pthread_mutex_unlock(w->wait_monitoring);
+}
+
+void	print_end(struct timeval time, char *str, int phid, t_wait *w)
+{
+	if (!w->stop)
+	{
+		ft_putnbr_fd((int)get_timer(time), 1);
+		write(1, " ", 1);
+		ft_putnbr_fd(phid + 1, 1);
+		write(1, " ", 1);
+		ft_putstr_fd(str, 1);
+	}
+}
 
 int	magic_usleep(int time, struct timeval t0, t_wait *w)
 {

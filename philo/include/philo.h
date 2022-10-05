@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 15:58:17 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:48:56 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ size_t	ft_strlen(const char *s);
 char	*philo_display(int time, char *str, int phid);
 char	*ft_itoa(int n);
 char	*ft_strjoin(char const *s1, char const *s2);
-void	print_action(struct timeval time, char *str, int phid, t_wait *w);
-void	print_end(struct timeval time, char *str, int phid, t_wait *w);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 //init.c
 void	init_all(t_data *data);
@@ -123,5 +123,7 @@ int		monitoring_loop(t_data *data);
 int		magic_usleep(int time, struct timeval t0, t_wait *w);
 void	init_timer(struct timeval *t0);
 time_t	get_timer(struct timeval t0);
+void	print_action(struct timeval time, char *str, int phid, t_wait *w);
+void	print_end(struct timeval time, char *str, int phid, t_wait *w);
 
 #endif
