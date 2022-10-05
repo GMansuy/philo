@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/04 18:13:30 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 14:16:48 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ static void	phi_get_data(t_data *data, int i)
 	int	last;
 
 	last = !(i == data->number_of_philo - 1);
-	data->phi[i].forks.left_fork = &data->forks[i];
-	data->phi[i].forks.right_fork = &data->forks[(i + 1) * last];
+	data->phi[i].wait.left_fork = &data->forks[i];
+	data->phi[i].wait.right_fork = &data->forks[(i + 1) * last];
 	data->phi[i].t0 = &data->t0;
 	data->phi[i].wait.wait_monitoring = &data->wait_monitoring;
 	data->phi[i].wait.wait_eat = &data->wait_eat;
 	data->phi[i].wait.wait_stop = &data->wait_stop;
+	data->phi[i].wait.stop = 0;
 	data->phi[i].args.time_to_eat = data->time_to_eat * 1000;
 	data->phi[i].args.time_to_sleep = data->time_to_sleep * 1000;
 	data->phi[i].args.time_to_die = data->time_to_die * 1000;
@@ -50,7 +51,6 @@ static void	phi_get_data(t_data *data, int i)
 	data->phi[i].dead = 0;
 	data->phi[i].has_eaten = 0;
 	data->phi[i].curr_eat = 0;
-	data->phi[i].stop = 0;
 }
 
 void	init_phi(t_data *data)

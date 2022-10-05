@@ -28,7 +28,7 @@ ___________________________________________________
 <!-- On a un tableau 	int *forks		chaque [] a un numéro associé => Numero du philo
 C'est une variable statique (conserve sa valeur)
 Elle est protégée par un mutex (les philo ne peuvent pas la modifier tous en même temps)
-La boucle est conditionnée par un usleep();
+La boucle est conditionnée par un magic_usleep();
 Il faut trouver la bonne valeur de time_to_think pour que les philo puissent manger dès que possible.  -->
 
 forks => tableau de mutex (static)

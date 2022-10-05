@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:26:32 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/04 18:42:01 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 14:12:35 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,17 @@ char	*philo_display(int time, char *str, int phid)
 	char	*display;
 
 	time_string = ft_itoa(time);
+	if (!time_string)
+		return (NULL);
 	phid_string = ft_itoa(phid);
+	if (!phid_string)
+		return (NULL);
 	tmp_display = ft_strjoin(time_string, phid_string);
+	if (!tmp_display)
+		return (NULL);
 	display = ft_strjoin(tmp_display, str);
+	if (!display)
+		return (NULL);
 	free(time_string);
 	free(phid_string);
 	free(tmp_display);
@@ -39,40 +47,16 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putstr_fd(char *s, int fd, t_phi *phi)
+void	print_action(struct timeval time, char *str, int phid, t_wait *w)
 {
-	int	len;
+	char *display;
 
-	if (!s)
+	display = philo_display(get_timer(time), str, phid + 1);
+	if (!display)
 		return ;
-	len = 0;
-	while (s[len])
-		len++;
-	write(fd, s, len * !phi->stop);
+	pthread_mutex_lock(w->wait_monitoring);
+	write(1, display, ft_strlen(display) * !w->stop);
+	pthread_mutex_unlock(w->wait_monitoring);
+	free(display);
 }
 
-static void	putnbr(unsigned int nbr, int fd, t_phi *phi)
-{
-	char	c;
-
-	if (nbr > 9)
-	{
-		putnbr(nbr / 10, fd, phi);
-	}
-	c = (nbr % 10) + '0';
-	write(fd, &c, !phi->stop);
-}
-
-void	ft_putnbr_fd(int n, int fd, t_phi *phi)
-{
-	unsigned int	nbr;
-
-	if (n < 0)
-	{
-		write(fd, "-", 1);
-		nbr = (unsigned int) -n;
-	}
-	else
-		nbr = (unsigned int) n;
-	putnbr(nbr, fd, phi);
-}
