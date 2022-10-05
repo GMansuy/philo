@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 15:42:10 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:39:40 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	phi_get_data(t_data *data, int i)
 	data->phi[i].dead = 0;
 	data->phi[i].has_eaten = 0;
 	data->phi[i].curr_eat = 0;
+	data->phi[i].last_meal = 0;
 }
 
 void	init_phi(t_data *data)

@@ -9,7 +9,7 @@ OBJ_DIR		= obj/
 BONUS_DIR	= src_bonus/
 
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra -g -pthread -I./include -MMD -MP
+CFLAGS		= -Wall -Werror -Wextra -g -pthread -I./include -MMD -MP -fsanitize=address
 
 RM			= rm -rf
 AR			= ar rcs

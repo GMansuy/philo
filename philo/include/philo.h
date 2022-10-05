@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 13:56:15 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:58:17 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*philo_display(int time, char *str, int phid);
 char	*ft_itoa(int n);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	print_action(struct timeval time, char *str, int phid, t_wait *w);
+void	print_end(struct timeval time, char *str, int phid, t_wait *w);
 
 //init.c
 void	init_all(t_data *data);

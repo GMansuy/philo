@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:24:46 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 15:42:11 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:16:01 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	go_eat(t_phi *phi)
 	pthread_mutex_unlock(phi->wait.wait_eat);
 	magic_usleep(phi->args.time_to_eat, *phi->t0, &phi->wait);
 	forks_pose(phi->args.number_of_philo, &phi->wait);
-	print_action(*phi->t0, "posed a fork\n", phi->id, &phi->wait);
 	phi->state = sleeping;
 	return (0);
 }

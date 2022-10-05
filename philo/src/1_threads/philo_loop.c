@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 10:06:59 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 15:43:09 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:11:51 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	join_phi(t_data *data)
 	while (++i < data->number_of_philo)
 	{
 		if (pthread_join(data->phi[i].th, NULL) != 0)
-			return (1);
-		if (pthread_join(data->phi[i].time_th, NULL) != 0)
 			return (1);
 	}
 	return (0);
