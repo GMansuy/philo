@@ -24,8 +24,6 @@ SRC_FILES 	=	main \
 				0_utils/free \
 				0_utils/parsing \
 				0_utils/str \
-				0_utils/ft_itoa \
-				0_utils/ft_strjoin \
 				1_threads/philo_loop \
 				1_threads/actions \
 				2_monitoring/timer \

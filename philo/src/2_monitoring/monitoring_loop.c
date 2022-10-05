@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 14:53:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 16:48:20 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 17:53:40 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	monitoring_loop(t_data *data)
 		while (++i < data->number_of_philo)
 		{
 			pthread_mutex_lock(&data->wait_eat);
-			enough_meals = (data->phi[i].curr_eat < data->number_of_eat);
+			enough_meals *= (data->phi[i].curr_eat >= data->number_of_eat) * (data->number_of_eat != 0);
 			pthread_mutex_unlock(&data->wait_eat);
 			if (is_dead(&data->phi[i]) == 1)
 			{

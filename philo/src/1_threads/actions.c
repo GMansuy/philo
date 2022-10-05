@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:24:46 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 16:16:01 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/05 17:28:03 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ int	go_eat(t_phi *phi)
 	if (forks_grab(&phi->args, phi->id, &phi->wait, *phi->t0) != 0)
 		return (forks_pose(phi->args.number_of_philo, &phi->wait), 1);
 	print_action(*phi->t0, "is eating\n", phi->id, &phi->wait);
-	phi->curr_eat++;
 	pthread_mutex_lock(phi->wait.wait_eat);
-	if (phi->args.max_eat && phi->curr_eat >= phi->args.max_eat)
-		return (forks_pose(phi->args.number_of_philo, &phi->wait),
-			pthread_mutex_unlock(phi->wait.wait_eat), 1);
+	phi->curr_eat++;
 	phi->last_meal = get_timer(*phi->t0);
 	pthread_mutex_unlock(phi->wait.wait_eat);
 	magic_usleep(phi->args.time_to_eat, *phi->t0, &phi->wait);
