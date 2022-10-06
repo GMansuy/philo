@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:35:04 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/03 12:48:59 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/06 18:01:27 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static long long	ft_atol(char *nptr)
 	while (nptr[i])
 	{
 		if (nptr[i] < '0' || nptr[i] > '9')
-			return (msg("Error : invalid argument\n"), 0);
+			return (0);
 		value += nptr[i] - '0';
 		if (nptr[i + 1] >= '0' && nptr[i + 1] <= '9')
 			value *= 10;
@@ -55,7 +55,7 @@ static int	get_int_from_args(char *str)
 	long long	value;
 
 	if (ft_strlen(str) > 11)
-		return (msg("Error : argument is too big\n"), 0);
+		return (0);
 	value = ft_atol(str);
 	if (value > INT_MAX || value < INT_MIN)
 		return (0);
@@ -68,24 +68,24 @@ int	parsing(int argc, char **argv, t_data *data)
 	if (argc < 5 || argc > 6)
 		return (usage());
 	data->number_of_philo = get_int_from_args(argv[1]);
-	if (!data->number_of_philo)
-		return (2);
+	if (data->number_of_philo <= 0 || data->number_of_philo > 200)
+		return (msg("Error : invalid argument\n"), 1);
 	data->time_to_die = get_int_from_args(argv[2]);
-	if (!data->time_to_die)
-		return (3);
+	if (data->time_to_die < 60)
+		return (msg("Error : invalid argument\n"), 1);
 	data->time_to_eat = get_int_from_args(argv[3]);
-	if (!data->time_to_eat)
-		return (4);
+	if (data->time_to_eat < 60)
+		return (msg("Error : invalid argument\n"), 1);
 	data->time_to_sleep = get_int_from_args(argv[4]);
-	if (!data->time_to_sleep)
-		return (5);
+	if (data->time_to_sleep < 60)
+		return (msg("Error : invalid argument\n"), 1);
 	if (argc == 6)
 	{
 		data->number_of_eat = get_int_from_args(argv[5]);
-		if (!data->number_of_eat)
-			return (6);
+		if (data->number_of_eat <= 0)
+			return (msg("Error : invalid argument\n"), 1);
 	}
 	if (is_neg(data) != 0)
-		return (7);
+		return (msg("Error : invalid argument\n"), 1);
 	return (0);
 }

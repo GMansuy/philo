@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:27:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 17:46:59 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/06 17:06:53 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	init_mutex(t_data *data)
 		return (2);
 	if (pthread_mutex_init(&data->wait_stop, NULL) != 0)
 		return (2);
+	if (pthread_mutex_init(&data->go, NULL) != 0)
+		return (2);
 	return (0);
 }
 
@@ -42,6 +44,7 @@ static void	phi_get_data(t_data *data, int i)
 	data->phi[i].wait.wait_monitoring = &data->wait_monitoring;
 	data->phi[i].wait.wait_eat = &data->wait_eat;
 	data->phi[i].wait.wait_stop = &data->wait_stop;
+	data->phi[i].wait.go = &data->go;
 	data->phi[i].wait.stop = 0;
 	data->phi[i].args.time_to_eat = data->time_to_eat;
 	data->phi[i].args.time_to_sleep = data->time_to_sleep;

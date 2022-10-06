@@ -34,4 +34,4 @@ Il faut trouver la bonne valeur de time_to_think pour que les philo puissent man
 forks => tableau de mutex (static)
 
  
-| 0 | 0 | 0 | 0 | 0
+| 0 2 0 3 0 | 0 | 0

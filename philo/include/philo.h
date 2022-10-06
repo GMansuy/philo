@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:51:43 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 17:55:44 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/06 17:07:47 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_wait
 	pthread_mutex_t	*wait_monitoring;
 	pthread_mutex_t	*wait_eat;
 	pthread_mutex_t	*wait_stop;
+	pthread_mutex_t	*go;
 	int				stop;
 }	t_wait;
 
@@ -67,12 +68,14 @@ typedef struct s_data
 	pthread_mutex_t	wait_monitoring;
 	pthread_mutex_t	wait_eat;
 	pthread_mutex_t	wait_stop;
+	pthread_mutex_t	go;
 	int				number_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_eat;
 	struct timeval	t0;
+	int				*enough_eat;
 }	t_data;
 
 //MAIN

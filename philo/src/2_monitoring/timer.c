@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:23:09 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 16:46:28 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:43:52 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	magic_usleep(int time, struct timeval t0, t_wait *w)
 		if (w->stop)
 			return (pthread_mutex_unlock(w->wait_stop), 1);
 		pthread_mutex_unlock(w->wait_stop);
-		usleep(1);
+		usleep(50);
 	}
 	return (0);
 }

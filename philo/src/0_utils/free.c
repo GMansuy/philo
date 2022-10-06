@@ -6,7 +6,7 @@
 /*   By: gmansuy <gmansuy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:08:13 by gmansuy           #+#    #+#             */
-/*   Updated: 2022/10/05 15:59:13 by gmansuy          ###   ########.fr       */
+/*   Updated: 2022/10/06 17:20:51 by gmansuy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	destroy_mutex(t_data *data)
 	pthread_mutex_destroy(&data->wait_monitoring);
 	pthread_mutex_destroy(&data->wait_eat);
 	pthread_mutex_destroy(&data->wait_stop);
+	pthread_mutex_destroy(&data->go);
 }
 
 void	free_all(t_data *data)
@@ -29,4 +30,5 @@ void	free_all(t_data *data)
 	destroy_mutex(data);
 	free(data->phi);
 	free(data->forks);
+	free(data->enough_eat);
 }
